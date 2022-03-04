@@ -6,11 +6,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(
+    JSON.parse(localStorage.getItem("initialState")) || []
+  );
   const [todoItem, setTodoItem] = useState({
     title: "",
     completed: false,
   });
+
+  localStorage.setItem("initialState", JSON.stringify(todoList));
 
   function onChange(e) {
     setTodoItem((prev) => ({

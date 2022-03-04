@@ -9,11 +9,13 @@ export default function TodoItem({ item, id, setTodoList, setTodoItem }) {
     setTodoList((prev) =>
       prev.map((item, index) => {
         if (id === index) {
-          return { ...item, completed: !item.completed };
+          return { ...item, completed: !item?.completed };
+        } else {
+          return item;
         }
       })
     );
-    item.completed ? toast.error("oh no") : toast.success("Awesome work");
+    item?.completed ? toast.error("oh no") : toast.success("Awesome work");
   }
 
   function onDelete() {
@@ -23,9 +25,9 @@ export default function TodoItem({ item, id, setTodoList, setTodoItem }) {
 
   return (
     <div className="todo-item-box">
-      {item.completed && <TiTick style={{ fill: "#1aa260" }} />}
-      <p className={item.completed ? "todo-item strike" : "todo-item"}>
-        {item.title}
+      {item?.completed && <TiTick style={{ fill: "#1aa260" }} />}
+      <p className={item?.completed ? "todo-item strike" : "todo-item"}>
+        {item?.title}
       </p>
       <div onClick={onClick} className="crossBtn">
         <ImCross />
